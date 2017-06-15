@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+    
+<h:head>
+    <title>Cadastro</title>
+</h:head>
+
+<h:body>
+	<h:form>
+         <p:growl id="msgSuccess" showDetail="true" sticky="true" />
+ 
+    <p:panel id="panel" header="cadastrar" style="margin-bottom:10px;">
+        <h:panelGrid columns="2" cellpadding="5">
+           
+            <h:outputLabel for="login" value="Login:" />
+            <p:inputText id="login" required="true" value="#{usuarioController.usuario.login}" />
+           
+ 
+            <p:outputLabel for="email" value="E-mail:" />
+            <p:inputText id="email" required="true" value="#{usuarioController.usuario.email}"/>
+    
+            <p:outputLabel for="senha" value="Senha:" />
+            <p:password id="senha" required="true" value="#{usuarioController.usuario.senha}"/>
+           
+        </h:panelGrid>
+    </p:panel>
+ 
+    <p:commandButton value="Cadastrar" action="#{usuarioController.salvar}" update="msgSuccess" type="submit"/>
+</h:form>
+</h:body>
+
+
+</html>
