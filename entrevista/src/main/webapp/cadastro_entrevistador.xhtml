@@ -15,7 +15,7 @@
 	
     <p:growl id="msgSuccess" showDetail="true" sticky="true" />
  
-    <p:panel id="panel" header="Informações do entrevistado" style="margin-bottom:10px;">
+    <p:panel id="panel" header="Cadastro de Entrevistados" style="margin-bottom:10px;">
         <h:panelGrid columns="2" cellpadding="5">
         
        	 <h:outputLabel for="nome" value="Nome:" />
@@ -34,7 +34,7 @@
         </h:panelGrid>
     </p:panel>
  
-    <p:commandButton value="Salvar" action="#{usuarioController.salvar}" update="msgSuccess" type="submit"/>
+    <p:commandButton value="Salvar" action="#{usuarioController.salvarEntrevistador}" update="msgSuccess" type="submit"/>
     <p:button value="voltar" onclick="window.history.back()" />
 </h:form>
 </h:body>

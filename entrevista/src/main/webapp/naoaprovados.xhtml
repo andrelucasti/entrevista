@@ -47,7 +47,11 @@
         </p:column>
         
         <p:column>
-         	<p:commandButton value="editar" action="#{aprovadosController.editarEntrevista(aprovado)}" />
+         	<p:commandButton value="editar" action="#{naoAprovadosController.editarEntrevista(naoAprovado)}" />
+        </p:column>
+        
+         <p:column>
+         	<p:commandButton value="remover" action="#{naoAprovadosController.removerEntrevista(naoAprovado)}" />
         </p:column>
     </p:dataTable>
     

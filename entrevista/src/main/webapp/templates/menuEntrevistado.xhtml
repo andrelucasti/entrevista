@@ -9,18 +9,12 @@
 
 <f:composition>
 
-	<p:tabMenu>
+	<p:tabMenu activeIndex="#{param.i}">
 		<p:menuitem value="Inicio" outcome="entrevistados">
 			<f:param name="i" value="0" />
 		</p:menuitem>
-		<p:menuitem value="Novo Entrevistador" outcome="cadastro_entrevistador">
+		<p:menuitem value="Meu Cadastro" outcome="cadastro_entrevistado">
 			<f:param name="i" value="1" />
-		</p:menuitem>
-		<p:menuitem value="Aprovados" outcome="aprovados">
-			<f:param name="i" value="2" />
-		</p:menuitem>
-		<p:menuitem value="Nao Aprovados" outcome="naoaprovados">
-			<f:param name="i" value="3" />
 		</p:menuitem>
 		
 		<p:menuitem value="Sair" url="/j_spring_security_logout">
@@ -28,7 +22,6 @@
 		</p:menuitem>
 
 	</p:tabMenu>
-
 
 </f:composition>
 

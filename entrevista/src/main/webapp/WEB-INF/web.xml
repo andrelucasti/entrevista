@@ -22,10 +22,4 @@
 		<extension>woff2</extension>
 		<mime-type>application/x-font-woff2</mime-type>
 	</mime-mapping>
-
-	<context-param>
-		<param-name>primefaces.THEME</param-name>
-		<param-value>bootstrap</param-value>
-	</context-param>
-
 </web-app>

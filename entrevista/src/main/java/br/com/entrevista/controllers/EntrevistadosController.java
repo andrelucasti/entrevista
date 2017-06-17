@@ -3,6 +3,7 @@ package br.com.entrevista.controllers;
 import java.io.IOException;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
@@ -56,8 +57,40 @@ public class EntrevistadosController {
 			e.printStackTrace();
 		}
 	}
-
 	
+	
+	public void editar(Usuario pUsuario){
+		FacesContext faces = FacesContext.getCurrentInstance();
+		
+		
+		try {
+			faces.getExternalContext().getSessionMap().put("entrevistadoSelecionado", pUsuario);
+			faces.getExternalContext().redirect("cadastro_entrevistado.xhtml");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+
+	public void remover(Usuario pUsuario){
+		FacesContext faces = FacesContext.getCurrentInstance();
+		faces.getExternalContext().getFlash().setKeepMessages(true);
+
+		try {
+			this.daoUsuario.delete(pUsuario);
+			faces.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!", "O usuário foi excluído"));
+			faces.getExternalContext().redirect("entrevistados.xhtml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+
 
 	
 	

@@ -31,13 +31,11 @@ public class EntrevistaController {
 	
 	private Entrevista entrevista  = new Entrevista();
 	private Usuario usuario = new Usuario();
-	//private List<Cargo> cargos = new ArrayList<>();
 	private List<SelectItem> itens = Arrays.asList(new SelectItem(Boolean.TRUE, "Sim"), new SelectItem(Boolean.FALSE, "Não"));
 	
 	
 	@PostConstruct
 	public void init() {
-		//this.listarCargos();
 		this.getObjectsRequest();
 		
 	}

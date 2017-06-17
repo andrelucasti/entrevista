@@ -59,10 +59,22 @@ public class AprovadosController {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	
+	public void removerEntrevista(Usuario pUsuario){
+		FacesContext faces = FacesContext.getCurrentInstance();
+		Entrevista entrevista = new Entrevista();
+		entrevista = this.daoEntrevista.findEntrevista(pUsuario.getId());
 		
+		this.daoEntrevista.delete(entrevista);
 		
-		
-		
+
+		try {
+			faces.getExternalContext().redirect("entrevistados.xhtml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

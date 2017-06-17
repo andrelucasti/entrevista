@@ -19,6 +19,9 @@
 	</f:insert>
 	
 	<h:form id="colecaoEntrevistados">
+	
+	 <p:growl id="msg" showDetail="true" sticky="true" />
+	
 	 <p:dataTable id="dtEntevistados" var="entrevistado" value="#{entrevistadosController.entrevistados}" selectionMode="single" selection="#{entrevistadosController.entrevistadoSeleciondo}" rowKey="#{entrevistado.id}">
         <p:ajax event="rowSelect" listener="#{entrevistadosController.redirecionarEntrevista}"/>
         
@@ -34,10 +37,17 @@
         <p:column headerText="Email">
             <h:outputText value="#{entrevistado.email}" />
         </p:column>
+        <p:column>
+         	<p:commandButton value="editar" action="#{entrevistadosController.editar(entrevistado)}" />
+        </p:column>
+        
+        <p:column>
+         	<p:commandButton value="remover" action="#{entrevistadosController.remover(entrevistado)}" />
+        </p:column>
+        
         <c:facet name="footer">
             
-            <p:commandButton process="dtEntevistados" value="Editar informações do entrevistado"  />
-            
+                 
         </c:facet>
     </p:dataTable>
     

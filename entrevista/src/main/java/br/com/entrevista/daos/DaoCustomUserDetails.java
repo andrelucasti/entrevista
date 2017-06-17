@@ -20,7 +20,15 @@ public class DaoCustomUserDetails implements UserDetailsService {
 	@Override
 	public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario findUsuarioByLogin = dao.findUsuarioByLogin(username);
+		
+		if (findUsuarioByLogin == null) {
+			
+			throw new UsernameNotFoundException("usuario não encontrado");
+			
+		}
+		
 		return new CustomUserDetails(findUsuarioByLogin);
+		
 	}
 
 }
