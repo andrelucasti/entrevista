@@ -2,18 +2,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
     
 <h:head>
-    <title>Cadastro</title>
+    <title>Cadastro de Entrevistados</title>
 </h:head>
 
 <h:body>
+
 	<h:form>
-         <p:growl id="msgSuccess" showDetail="true" sticky="true" />
+	
+    <p:growl id="msgSuccess" showDetail="true" sticky="true" />
  
-    <p:panel id="panel" header="cadastrar" style="margin-bottom:10px;">
+    <p:panel id="panel" header="Cadastro de Entrevistados" style="margin-bottom:10px;">
         <h:panelGrid columns="2" cellpadding="5">
+        
+       	 <h:outputLabel for="nome" value="Nome:" />
+            <p:inputText id="nome" required="true" value="#{usuarioController.usuario.nome}" />
            
             <h:outputLabel for="login" value="Login:" />
             <p:inputText id="login" required="true" value="#{usuarioController.usuario.login}" />

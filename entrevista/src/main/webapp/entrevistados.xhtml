@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsf/core"
+    xmlns:f="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+<h:head>
+    <title>Usuarios Cadastrados</title>
+</h:head>
+
+<h:body>
+
+	<f:insert>
+		
+		<f:include src="/templates/menu.xhtml"></f:include>
+	
+	</f:insert>
+	
+	<h:form id="colecaoEntrevistados">
+	 <p:dataTable id="dtEntevistados" var="entrevistado" value="#{entrevistadosController.entrevistados}" selectionMode="single" selection="#{entrevistadosController.entrevistadoSeleciondo}" rowKey="#{entrevistado.id}">
+        <p:ajax event="rowSelect" listener="#{entrevistadosController.redirecionarEntrevista}"/>
+        
+        <c:facet name="header">
+            Candidatos
+        </c:facet>
+        <p:column headerText="Id">
+            <h:outputText value="#{entrevistado.id}" />
+        </p:column>
+        <p:column headerText="Nome">
+            <h:outputText value="#{entrevistado.nome}" />
+        </p:column>
+        <p:column headerText="Email">
+            <h:outputText value="#{entrevistado.email}" />
+        </p:column>
+        <c:facet name="footer">
+            
+            <p:commandButton process="dtEntevistados" value="Editar informações do entrevistado"  />
+            
+        </c:facet>
+    </p:dataTable>
+    
+    </h:form>
+	
+</h:body>
+
+
+</html>

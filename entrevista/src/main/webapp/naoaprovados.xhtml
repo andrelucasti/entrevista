@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsf/core"
+    xmlns:f="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+<h:head>
+    <title> Não Aprovados</title>
+</h:head>
+
+<h:body>
+	
+	<f:insert>
+		
+		<f:include src="/templates/menu.xhtml"></f:include>
+	
+	</f:insert>
+	
+	<h:form id="naoAprovados">
+	 <p:dataTable id="dtNaoAprovados" var="naoAprovado" value="#{naoAprovadosController.listaNaoAprovados}" selectionMode="single" rowKey="#{naoAprovado.id}">
+              
+        <c:facet name="header">
+            Não Aprovados
+        </c:facet>
+        <p:column headerText="Id">
+            <h:outputText value="#{naoAprovado.id}" />
+        </p:column>
+        
+        <p:column headerText="Nome">
+            <h:outputText value="#{naoAprovado.nome}" />
+        </p:column>
+        
+        <p:column headerText="Email">
+            <h:outputText value="#{naoAprovado.email}" />
+        </p:column>
+        
+         <p:column headerText="Data da entrevista">
+            <h:outputText value="#{naoAprovado.entrevista.data}">
+            	<c:convertDateTime pattern="MM-dd-yyyy" />
+            </h:outputText>
+        </p:column>
+               
+         <p:column headerText="Cargo">
+            <h:outputText value="#{naoAprovado.entrevista.cargo.enumCargo}" />
+        </p:column>
+        
+        <p:column>
+         	<p:commandButton value="editar" action="#{aprovadosController.editarEntrevista(aprovado)}" />
+        </p:column>
+    </p:dataTable>
+    
+    </h:form>
+	
+</h:body>
+
+
+</html>

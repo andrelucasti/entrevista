@@ -13,12 +13,13 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import br.com.entrevista.daos.DaoUsuario;
 
 @Configuration
 @EnableJpaRepositories(basePackageClasses  = {DaoUsuario.class})
+@EnableTransactionManagement
 public class JPAConfig {
 	
 	
@@ -52,7 +53,7 @@ public class JPAConfig {
 		}
 		
 		@Bean
-		public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+		public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
 		    JpaTransactionManager transactionManager = new JpaTransactionManager();
 		    transactionManager.setEntityManagerFactory(emf);
 		    return transactionManager;
@@ -67,5 +68,9 @@ public class JPAConfig {
 			
 			return properties;
 		}
+		
+		
+		
+		
 
 }

@@ -1,6 +1,7 @@
 package br.com.entrevista.controllers;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -10,7 +11,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.RequestScope;
 
+import br.com.entrevista.daos.DaoTipoUsuario;
 import br.com.entrevista.daos.DaoUsuario;
+import br.com.entrevista.models.EnumTipoUsuario;
+import br.com.entrevista.models.TipoUsuario;
 import br.com.entrevista.models.Usuario;
 
 @Controller
@@ -24,6 +28,9 @@ public class UsuarioController implements Serializable {
 
 	@Autowired
 	private DaoUsuario daoUsuario;
+	
+	@Autowired
+	private DaoTipoUsuario daoTpUsuario;
 	
 	private Usuario usuario = new Usuario();
 
@@ -41,7 +48,12 @@ public class UsuarioController implements Serializable {
 		FacesContext faces = FacesContext.getCurrentInstance();
 		faces.getExternalContext().getFlash().setKeepMessages(true);
 		
+		TipoUsuario tipoUsuario = this.daoTpUsuario.findByName(EnumTipoUsuario.ENTREVISTADO);
+				
+		this.usuario.setTipoUsuarios(Arrays.asList(tipoUsuario));
+				
 		try {
+			
 			daoUsuario.save(this.usuario);	
 			faces.addMessage("msgSuccess", new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!", "O usuário: "+usuario.getEmail()+" foi cadastrado."));
 			    
@@ -52,7 +64,7 @@ public class UsuarioController implements Serializable {
 			this.usuario = new Usuario();			
 		}
 		
-		return "index?faces-redirect=true";
+		return "cadastro_entrevistado?faces-redirect=true";
 	}
 	
 	

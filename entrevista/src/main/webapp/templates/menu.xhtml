@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:f="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<f:composition>
+
+	<p:tabMenu activeIndex="#{param.i}">
+		<p:menuitem value="Inicio" outcome="entrevistados">
+			<f:param name="i" value="0" />
+		</p:menuitem>
+		<p:menuitem value="Novo Entrevistado" outcome="cadastro_entrevistado">
+			<f:param name="i" value="1" />
+		</p:menuitem>
+		<p:menuitem value="Aprovados" outcome="aprovados">
+			<f:param name="i" value="2" />
+		</p:menuitem>
+		<p:menuitem value="Nao Aprovados" outcome="naoaprovados">
+			<f:param name="i" value="3" />
+		</p:menuitem>
+
+	</p:tabMenu>
+
+
+</f:composition>
+
+</html>
