@@ -11,18 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.RequestScope;
 
-import br.com.entrevista.daos.DaoUsuario;
 import br.com.entrevista.models.Entrevista;
 import br.com.entrevista.models.EnumTipoUsuario;
 import br.com.entrevista.models.Usuario;
+import br.com.entrevista.service.UsuarioService;
 
 @Controller
 @RequestScope
 public class EntrevistadosController {
-
-
+	
 	@Autowired
-	private DaoUsuario daoUsuario;
+	private UsuarioService usuarioService;
 
 	private Entrevista entrevista  = new Entrevista();
 	private Usuario entrevistadoSeleciondo = new Usuario();
@@ -43,7 +42,7 @@ public class EntrevistadosController {
 	
 	
 	public List<Usuario> getEntrevistados(){	
-		List<Usuario> usuarios = this.daoUsuario.findAllUsuariosEntrevistados(EnumTipoUsuario.ENTREVISTADO);
+		List<Usuario> usuarios = this.usuarioService.findAllUsuariosEntrevistados(EnumTipoUsuario.ENTREVISTADO);
 		return usuarios;
 		
 	}
@@ -80,7 +79,7 @@ public class EntrevistadosController {
 		faces.getExternalContext().getFlash().setKeepMessages(true);
 
 		try {
-			this.daoUsuario.delete(pUsuario);
+			this.usuarioService.delete(pUsuario);
 			faces.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!", "O usuário foi excluído"));
 			faces.getExternalContext().redirect("entrevistados.xhtml");
 		} catch (IOException e) {

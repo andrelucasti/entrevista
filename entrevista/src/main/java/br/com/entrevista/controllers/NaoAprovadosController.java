@@ -1,3 +1,4 @@
+
 package br.com.entrevista.controllers;
 
 import java.io.IOException;
@@ -9,24 +10,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.RequestScope;
 
-import br.com.entrevista.daos.DaoEntrevista;
-import br.com.entrevista.daos.DaoUsuario;
 import br.com.entrevista.models.Entrevista;
 import br.com.entrevista.models.Usuario;
+import br.com.entrevista.service.EntrevistaService;
+import br.com.entrevista.service.UsuarioService;
 
 @Controller
 @RequestScope
 public class NaoAprovadosController {
+
 	
 	@Autowired
-	private DaoUsuario daoUsuario;
+	private UsuarioService usuarioService;
+	
 	@Autowired
-	private DaoEntrevista daoEntrevista;
+	private EntrevistaService entrevistaService;
 	
 	
 	
 	public List<Usuario> getListaNaoAprovados(){
-		List<Usuario> naoAprovados = this.daoUsuario.findAllUsuariosNaoAprovados();
+		List<Usuario> naoAprovados = this.usuarioService.findAllUsuariosNaoAprovados();
 		
 		return naoAprovados;
 	}
@@ -35,7 +38,7 @@ public class NaoAprovadosController {
 	public void editarEntrevista(Usuario pUsuario){
 		FacesContext faces = FacesContext.getCurrentInstance();
 		Entrevista entrevista = new Entrevista();
-		entrevista = this.daoEntrevista.findEntrevista(pUsuario.getId());
+		entrevista = this.entrevistaService.findEntrevistaByUsuario(pUsuario);
 		
 		faces.getExternalContext().getSessionMap().put("entrevista", entrevista);
 		faces.getExternalContext().getSessionMap().put("entrevistadoSelecionado", entrevista.getUsuario());
@@ -51,9 +54,9 @@ public class NaoAprovadosController {
 	public void removerEntrevista(Usuario pUsuario){
 		FacesContext faces = FacesContext.getCurrentInstance();
 		Entrevista entrevista = new Entrevista();
-		entrevista = this.daoEntrevista.findEntrevista(pUsuario.getId());
+		entrevista = this.entrevistaService.findEntrevistaByUsuario(pUsuario);
 		
-		this.daoEntrevista.delete(entrevista);
+		this.entrevistaService.delete(entrevista);
 		
 		try {
 			faces.getExternalContext().redirect("entrevistados.xhtml");

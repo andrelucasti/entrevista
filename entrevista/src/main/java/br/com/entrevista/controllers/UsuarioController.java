@@ -1,6 +1,5 @@
 package br.com.entrevista.controllers;
 
-import java.io.Serializable;
 import java.util.Arrays;
 
 import javax.annotation.PostConstruct;
@@ -12,27 +11,20 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.RequestScope;
 
-import br.com.entrevista.daos.DaoTipoUsuario;
-import br.com.entrevista.daos.DaoUsuario;
 import br.com.entrevista.models.EnumTipoUsuario;
 import br.com.entrevista.models.TipoUsuario;
 import br.com.entrevista.models.Usuario;
+import br.com.entrevista.service.UsuarioService;
 
 @Controller
 @RequestScope
-public class UsuarioController implements Serializable {
+public class UsuarioController {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private DaoUsuario daoUsuario;
+	private UsuarioService usuarioService;
 
-	@Autowired
-	private DaoTipoUsuario daoTpUsuario;
-
+	
 
 	@PostConstruct
 	private void initi() {
@@ -75,13 +67,13 @@ public class UsuarioController implements Serializable {
 		FacesContext faces = FacesContext.getCurrentInstance();
 		faces.getExternalContext().getFlash().setKeepMessages(true);
 
-		TipoUsuario tipoUsuario = this.daoTpUsuario.findByName(EnumTipoUsuario.ENTREVISTADO);
+		TipoUsuario tipoUsuario = this.usuarioService.findTipoUsuario(EnumTipoUsuario.ENTREVISTADO);
 
 		this.usuario.setTipoUsuarios(Arrays.asList(tipoUsuario));
 
 		try {
 
-			daoUsuario.save(this.usuario);	
+			usuarioService.save(this.usuario);	
 			faces.addMessage("msgSuccess", new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!", "O usuário: "+usuario.getEmail()+" foi cadastrado."));
 
 		} catch (DataIntegrityViolationException e) {
@@ -99,13 +91,13 @@ public class UsuarioController implements Serializable {
 		FacesContext faces = FacesContext.getCurrentInstance();
 		faces.getExternalContext().getFlash().setKeepMessages(true);
 
-		TipoUsuario tipoUsuario = this.daoTpUsuario.findByName(EnumTipoUsuario.ENTREVISTADOR);
+		TipoUsuario tipoUsuario = this.usuarioService.findTipoUsuario(EnumTipoUsuario.ENTREVISTADOR);
 
 		this.usuario.setTipoUsuarios(Arrays.asList(tipoUsuario));
 
 		try {
 
-			daoUsuario.save(this.usuario);	
+			usuarioService.save(this.usuario);	
 			faces.addMessage("msgSuccess", new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!", "O usuário: "+usuario.getEmail()+" foi cadastrado."));
 
 		} catch (DataIntegrityViolationException e) {
