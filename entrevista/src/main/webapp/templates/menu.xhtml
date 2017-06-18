@@ -9,22 +9,20 @@
 
 <f:composition>
 
-	<p:tabMenu>
-		<p:menuitem value="Inicio" outcome="entrevistados">
-			<f:param name="i" value="0" />
-		</p:menuitem>
-		<p:menuitem value="Novo Entrevistador" outcome="cadastro_entrevistador">
-			<f:param name="i" value="1" />
-		</p:menuitem>
-		<p:menuitem value="Aprovados" outcome="aprovados">
-			<f:param name="i" value="2" />
-		</p:menuitem>
-		<p:menuitem value="Nao Aprovados" outcome="naoaprovados">
-			<f:param name="i" value="3" />
+	<p:tabMenu activeIndex="#{activeIndexController.activeIndex}">
+		<p:menuitem value="Inicio" outcome="entrevistados" action="#{activeIndexController.addActiveIndex(0)}">
 		</p:menuitem>
 		
-		<p:menuitem value="Sair" url="/j_spring_security_logout">
-			<f:param name="i" value="4" />
+		<p:menuitem value="Novo Entrevistador" outcome="cadastro_entrevistador" action="#{activeIndexController.addActiveIndex(1)}">
+		</p:menuitem>
+		
+		<p:menuitem value="Aprovados" outcome="aprovados" action="#{activeIndexController.addActiveIndex(2)}">
+		</p:menuitem>
+		
+		<p:menuitem value="Nao Aprovados" outcome="naoaprovados" action="#{activeIndexController.addActiveIndex(3)}">
+		</p:menuitem>
+		
+		<p:menuitem value="Sair" url="/j_spring_security_logout" action="#{activeIndexController.addActiveIndex(4)}">
 		</p:menuitem>
 
 	</p:tabMenu>
