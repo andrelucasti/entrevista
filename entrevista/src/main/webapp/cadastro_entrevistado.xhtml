@@ -13,28 +13,28 @@
 
 	<h:form>
 	
-    <p:growl id="msgSuccess" showDetail="true" sticky="true" />
+    <p:growl id="msg" showDetail="true" sticky="true" />
  
     <p:panel id="panel" header="Informações do entrevistado" style="margin-bottom:10px;">
         <h:panelGrid columns="2" cellpadding="5">
         
        	 <h:outputLabel for="nome" value="Nome:" />
-            <p:inputText id="nome" required="true" value="#{usuarioController.usuario.nome}" />
+            <p:inputText id="nome" required="true" value="#{usuarioController.usuarioEntrevistado.nome}" />
            
             <h:outputLabel for="login" value="Login:" />
-            <p:inputText id="login" required="true" value="#{usuarioController.usuario.login}" />
+            <p:inputText id="login" required="true" value="#{usuarioController.usuarioEntrevistado.login}" />
            
  
             <p:outputLabel for="email" value="E-mail:" />
-            <p:inputText id="email" required="true" value="#{usuarioController.usuario.email}"/>
+            <p:inputText id="email" required="true" value="#{usuarioController.usuarioEntrevistado.email}"/>
     
             <p:outputLabel for="senha" value="Senha:" />
-            <p:password id="senha" required="true" value="#{usuarioController.usuario.senha}"/>
+            <p:password id="senha" required="true" value="#{usuarioController.usuarioEntrevistado.senha}"/>
            
         </h:panelGrid>
     </p:panel>
  
-    <p:commandButton value="Salvar" action="#{usuarioController.salvar}" update="msgSuccess" type="submit"/>
+    <p:commandButton value="Salvar" action="#{usuarioController.salvar}" update="msg" type="submit"/>
     <p:button value="voltar" onclick="window.history.back()" />
 </h:form>
 </h:body>

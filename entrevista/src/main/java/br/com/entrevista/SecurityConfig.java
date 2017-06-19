@@ -7,15 +7,28 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
+/**
+ * 
+ * @author Andre
+ *	Implementação customizada do {@link WebSecurityConfigurerAdapter}
+ */
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	
+	//Fazendo a injeção do cara responsável para buscar todos os usuarios que tem acesso a minha aplicação que está no banco de dados
 	@Autowired
 	private UserDetailsService dao;
 	
+	/**
+	 * 	@author Andre
+	 *  
+	 *  Caso o usuário que foi carregado na memória pelo {@link AuthenticationManagerBuilder} exista,
+	 *  minha classe {@link FormAuthHandler } que tem a implementação do {@link AuthenticationSuccessHandler}
+	 *  vai redirecionar o usuário que está realizando a autenticação para sua 'Home page' de acordo com sua credencial.
+	 */
 	@Autowired
 	private FormAuthHandler successHandler;
 	
@@ -43,6 +56,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	
+	/**
+	 * @author Andre
+	 * 
+	 * Carrega todos os usuarios que tem acesso ao sistema na memoria.
+	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(dao);

@@ -2,6 +2,7 @@ package br.com.entrevista.service;
 
 import java.util.List;
 
+import br.com.entrevista.models.Cargo;
 import br.com.entrevista.models.EnumTipoUsuario;
 import br.com.entrevista.models.TipoUsuario;
 import br.com.entrevista.models.Usuario;
@@ -17,6 +18,8 @@ public interface UsuarioService {
 	public List<Usuario> findAllUsuariosNaoAprovados();
 	public List<TipoUsuario>findAllTipoUsuario();
 	public TipoUsuario findTipoUsuario(EnumTipoUsuario pTipoUsuario);
+	public List<Cargo> findAllCargo();
+	public Cargo findCargo(Integer pId);
 	
 	
 

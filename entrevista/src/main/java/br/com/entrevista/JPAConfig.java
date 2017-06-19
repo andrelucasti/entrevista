@@ -17,12 +17,23 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import br.com.entrevista.daos.DaoUsuario;
 
+/**
+ * 
+ * @author Andre
+ * 
+ *	Classe de configuração do JPA
+ */
 @Configuration
-@EnableJpaRepositories(basePackageClasses  = {DaoUsuario.class})
-@EnableTransactionManagement
+@EnableJpaRepositories(basePackageClasses = {DaoUsuario.class}) 
+@EnableTransactionManagement //Habilita poder usar a anotação @Transactional
 public class JPAConfig {
 	
-	
+	/**
+	 * @author Andre
+	 * @return
+	 * 
+	 * Responsável pela configuração de conexão e dialeto do banco que vai ser usado .
+	 */
 		@Bean
 		public DataSource dataSource(){
 			
@@ -36,6 +47,15 @@ public class JPAConfig {
 			return dataSource;
 		}
 		
+		/**
+		 * @author Andre
+		 * @param dataSource
+		 * @return
+		 * 
+		 * Este bean é representa o  {@link EntityManagerFactory } ou seja, como o spring é um IOC 
+		 * ele vai ficar pelo "Begin, e commit" no gerenciamento da minha persistencia de dados e carregamento das minhas entidades JPA.
+		 */
+		
 		@Bean
 		public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
 		    LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
@@ -46,12 +66,24 @@ public class JPAConfig {
 		    return emfb;
 		}
 		
-		
+		/**
+		 * @author Andre
+		 * @return
+		 * 
+		 * Informo que estou usandoa implementação do Hibernate
+		 */
 		@Bean 
 		public JpaVendorAdapter jpaVendorAdapter() {
 		    return new HibernateJpaVendorAdapter();
 		}
 		
+		/**
+		 * 
+		 * @param emf
+		 * @return
+		 * 
+		 * habilitando o gerenciador de transação para o spring
+		 */
 		@Bean
 		public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
 		    JpaTransactionManager transactionManager = new JpaTransactionManager();

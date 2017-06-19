@@ -2,14 +2,14 @@ package br.com.entrevista.daos;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import br.com.entrevista.models.EnumTipoUsuario;
 import br.com.entrevista.models.Usuario;
 
-public interface DaoUsuario extends CrudRepository<Usuario, Integer>{
+public interface DaoUsuario extends JpaRepository<Usuario, Integer>{
 	
 	@Query("select u from Usuario u left join fetch u.entrevista e join fetch u.tipoUsuarios t  where t.tipoUsuario=:pTipoUsuario and e.id = null")
 	public List<Usuario> findAllUsuariosEntrevistados(@Param("pTipoUsuario") EnumTipoUsuario pTipoUsuario);

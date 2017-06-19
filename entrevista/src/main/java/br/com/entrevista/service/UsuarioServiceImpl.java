@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import br.com.entrevista.daos.DaoCargo;
 import br.com.entrevista.daos.DaoTipoUsuario;
 import br.com.entrevista.daos.DaoUsuario;
+import br.com.entrevista.models.Cargo;
 import br.com.entrevista.models.EnumTipoUsuario;
 import br.com.entrevista.models.TipoUsuario;
 import br.com.entrevista.models.Usuario;
 
-@Transactional
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
 	
@@ -21,6 +21,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Autowired
 	private DaoTipoUsuario daoTipoUsuario;
+	
+	@Autowired
+	private DaoCargo daoCargo;
 
 	@Override
 	public void save(Usuario pUsuario) {
@@ -42,7 +45,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Override
 	public List<Usuario> findAll() {
-		return (List<Usuario>) this.daoUsuario.findAll();
+		return this.daoUsuario.findAll();
 	}
 
 	@Override
@@ -52,22 +55,32 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Override
 	public List<Usuario> findAllUsuariosAprovados() {
-		return this.findAllUsuariosAprovados();
+		return this.daoUsuario.findAllUsuariosAprovados();
 	}
 
 	@Override
 	public List<Usuario> findAllUsuariosNaoAprovados() {
-		return this.findAllUsuariosNaoAprovados();
+		return this.daoUsuario.findAllUsuariosNaoAprovados();
 	}
 
 	@Override
 	public List<TipoUsuario> findAllTipoUsuario() {
-		return (List<TipoUsuario>) this.daoTipoUsuario.findAll();
+		return  this.daoTipoUsuario.findAll();
 	}
 
 	@Override
 	public TipoUsuario findTipoUsuario(EnumTipoUsuario pTipoUsuario) {
 		return this.daoTipoUsuario.findByName(pTipoUsuario);
+	}
+
+	@Override
+	public List<Cargo> findAllCargo() {
+		return this.daoCargo.findAll();
+	}
+
+	@Override
+	public Cargo findCargo(Integer pId) {
+		return this.daoCargo.findOne(pId);
 	}
 
 }

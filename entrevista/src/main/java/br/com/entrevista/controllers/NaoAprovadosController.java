@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.annotation.RequestScope;
 
 import br.com.entrevista.models.Entrevista;
@@ -40,7 +41,6 @@ public class NaoAprovadosController {
 		Entrevista entrevista = new Entrevista();
 		entrevista = this.entrevistaService.findEntrevistaByUsuario(pUsuario);
 		
-		faces.getExternalContext().getSessionMap().put("entrevista", entrevista);
 		faces.getExternalContext().getSessionMap().put("entrevistadoSelecionado", entrevista.getUsuario());
 
 		try {
@@ -50,7 +50,7 @@ public class NaoAprovadosController {
 		}
 	}
 		
-	
+	@Transactional
 	public void removerEntrevista(Usuario pUsuario){
 		FacesContext faces = FacesContext.getCurrentInstance();
 		Entrevista entrevista = new Entrevista();

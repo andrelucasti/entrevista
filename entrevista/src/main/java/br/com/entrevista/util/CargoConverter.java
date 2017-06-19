@@ -7,26 +7,42 @@ import javax.faces.convert.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.entrevista.daos.DaoCargo;
 import br.com.entrevista.models.Cargo;
-
+import br.com.entrevista.service.UsuarioService;
+/**
+ * 
+ * @author Andre
+ *	
+ * Responsável por converter o ID do meu objeto {@link Cargo} para String
+ *	
+ *
+ */
 @Component
 public class CargoConverter implements Converter {
 	
 	@Autowired
-	private DaoCargo daoCargo;
+	private UsuarioService daoCargo;
 	
+	/**
+	 * Recebe a string da view e transforma para o objeto 
+	 */
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+		
 		if (value.equals("")) {
 			
 			return new Cargo();
 		} else {
 		
-			return daoCargo.findOne(Integer.valueOf(value));
+			return daoCargo.findCargo(Integer.valueOf(value));
 		}
 	}
-
+	
+	/**
+	 * @author Andre
+	 * 
+	 * String retornada será utilizada pelo componente JSF para ser exibida na tela do usuário.
+	 */
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		

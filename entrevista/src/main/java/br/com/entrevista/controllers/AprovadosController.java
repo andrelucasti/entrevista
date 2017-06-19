@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,8 +40,6 @@ public class AprovadosController {
 
 	public List<Usuario> getListaAprovados(){
 		List<Usuario> aprovados = this.usuarioService.findAllUsuariosAprovados();
-		
-		
 		return aprovados;
 	}
 	
@@ -49,7 +48,6 @@ public class AprovadosController {
 		Entrevista entrevista = new Entrevista();
 		entrevista = this.entrevistaService.findEntrevistaByUsuario(pUsuario);
 		
-		faces.getExternalContext().getSessionMap().put("entrevista", entrevista);
 		faces.getExternalContext().getSessionMap().put("entrevistadoSelecionado", entrevista.getUsuario());
 
 		try {
@@ -61,6 +59,7 @@ public class AprovadosController {
 	}
 	
 	
+	@Transactional
 	public void removerEntrevista(Usuario pUsuario){
 		FacesContext faces = FacesContext.getCurrentInstance();
 		Entrevista entrevista = new Entrevista();
